@@ -9,7 +9,15 @@ from models.basic import BASIC
 from models.VGG16 import VGG16_19
 from utils.config import *
 
-
+def print_log(string, print_on_screen=False, print_on_file=True):
+    if print_on_screen:
+        print(string)
+    if print_on_file:
+        #with open(main_path + 'results/ex_logs/' + timeExec + ".results", 'a') as logfile:
+        #    logfile.write(string + "\n")
+        with open(main_path + 'results' , 'a') as logfile:
+            logfile.write("Result:\n Epochs {} Image_size{} Batch_size{} \n".format(arguments.epochs, arguments.image_size, arguments.batch_size))
+            logfile.write(string + "\n")
 def main(arguments):
 
     print("STARTING EXECUTION AT\t{}".format(time.strftime("%d-%m %H:%M:%S")))
@@ -65,9 +73,9 @@ def main(arguments):
     model.fit(x=fin_train_ds, batch_size=arguments.batch_size, epochs=arguments.epochs)
 
     print('Start Test')
-    model.evaluate(test_ds)
-
-    del fin_train_ds, test_ds
+    res = model.evaluate(test_ds)
+    print_log(res)
+    del fin_train_ds, test_ds, res
 
     # save model and architecture to single file
     if arguments.output_model is not None:
