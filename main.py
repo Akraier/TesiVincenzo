@@ -9,14 +9,15 @@ from models.basic import BASIC
 from models.VGG16 import VGG16_19
 from utils.config import *
 
-def print_log(string, print_on_screen=False, print_on_file=True):
+def print_log(string, print_on_screen=False, print_on_file=True, arguments):
     if print_on_screen:
         print(string)
     if print_on_file:
         #with open(main_path + 'results/ex_logs/' + timeExec + ".results", 'a') as logfile:
         #    logfile.write(string + "\n")
         with open(main_path + 'results' , 'a') as logfile:
-            logfile.write("Result:\n Epochs {} Image_size{} Batch_size{} \n".format(arguments.epochs, arguments.image_size, arguments.batch_size))
+            logfile.write("Result:\n Epochs {} Image_size{} Batch_size{} \n"
+                          .format(arguments.epochs, arguments.image_size, arguments.batch_size))
             logfile.write(string + "\n")
 def main(arguments):
 
@@ -74,7 +75,7 @@ def main(arguments):
 
     print('Start Test')
     res = model.evaluate(test_ds)
-    print_log(res)
+    print_log(res,arguments)
     del fin_train_ds, test_ds, res
 
     # save model and architecture to single file
