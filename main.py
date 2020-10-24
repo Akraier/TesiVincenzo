@@ -20,8 +20,8 @@ def print_log(string, print_on_screen=False, print_on_file=True):
 
 def main(arguments):
 
-    print_log("STARTING EXECUTION AT\t{}".format(time.strftime("%d-%m %H:%M:%S")), print_on_screen=True)
-    print_log("Training of Epochs: {}; Batch Size: {}; Image Size: {};\n".format(arguments.epochs,arguments.batch_size,arguments.image_size))
+    print("STARTING EXECUTION AT\t{}".format(time.strftime("%d-%m %H:%M:%S")))
+    #print_log("Training of Epochs: {}; Batch Size: {}; Image Size: {};\n".format(arguments.epochs,arguments.batch_size,arguments.image_size))
     print("LOADING AND PRE-PROCESSING DATA")
 
     dataset_base = main_path + arguments.dataset
@@ -73,9 +73,9 @@ def main(arguments):
     model.fit(x=fin_train_ds, batch_size=arguments.batch_size, epochs=arguments.epochs)
 
     print('Start Test')
-    loss, acc = model.evaluate(test_ds)
-    print_log(model.metrics_name,print_on_screen=True)
-    del fin_train_ds, test_ds, loss, acc
+    model.evaluate(test_ds)
+
+    del fin_train_ds, test_ds
 
 
     # save model and architecture to single file
