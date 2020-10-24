@@ -73,9 +73,9 @@ def main(arguments):
     model.fit(x=fin_train_ds, batch_size=arguments.batch_size, epochs=arguments.epochs)
 
     print('Start Test')
-    loss, main_loss, aux_loss, main_acc, aux_acc = model.evaluate(test_ds)
-    print_log(loss + main_loss + aux_loss + main_acc + aux_acc,arguments)
-    del fin_train_ds, test_ds, loss, main_loss, aux_loss, main_acc, aux_acc
+    loss, acc = model.evaluate(test_ds)
+    print_log(loss + acc,arguments)
+    del fin_train_ds, test_ds, loss, acc
 
 
     # save model and architecture to single file
