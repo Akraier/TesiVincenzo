@@ -74,7 +74,7 @@ def main(arguments):
 
     print('Start Test')
     loss, acc = model.evaluate(test_ds)
-    print_log(model.metrics)
+    print_log(model.metrics,print_on_screen=True)
     del fin_train_ds, test_ds, loss, acc
 
 
