@@ -21,7 +21,7 @@ def print_log(string,arguments , print_on_screen=False, print_on_file=True):
 
 def main(arguments):
 
-    print_log("STARTING EXECUTION AT\t{}".format(time.strftime("%d-%m %H:%M:%S")), print_on_screen=True)
+    print_log("STARTING EXECUTION AT\t{}".format(time.strftime("%d-%m %H:%M:%S")),arguments, print_on_screen=True)
     #print_log("Training of Epochs: {}; Batch Size: {}; Image Size: {};\n".format(arguments.epochs,arguments.batch_size,arguments.image_size))
     print("LOADING AND PRE-PROCESSING DATA")
 
@@ -52,12 +52,12 @@ def main(arguments):
     train_ds = prepare_for_training(lab_train_ds)
     val_ds = prepare_for_training(lab_val_ds)
 
-    print_log('Start Training for {} epochs  '.format(arguments.epochs), print_on_screen=True)
+    print_log('Start Training for {} epochs  '.format(arguments.epochs), arguments, print_on_screen=True)
     log_fit = "log/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_fit, histogram_freq = 1)
     train = model.fit(x=train_ds, batch_size=arguments.batch_size, epochs=arguments.epochs,
               validation_data=val_ds,callbacks=[tensorboard_callback])
-    print_log("training loss: " + train.history['loss'] + "training acc:" + train.history['acc'])
+    print_log("training loss: " + train.history['loss'] + "training acc:" + train.history['acc'],arguments)
     del train_ds, val_ds
 
     # --------------  FINAL TRAINING and TEST part  --------------------
@@ -71,15 +71,15 @@ def main(arguments):
     test_ds = prepare_for_training(lab_test_ds)
 
     # Train the model over the entire total_training set and then test
-    print_log('Start Final Training for {} epochs  '.format(arguments.epochs), print_on_screen=True)
+    print_log('Start Final Training for {} epochs  '.format(arguments.epochs),arguments, print_on_screen=True)
     final_train = model.fit(x=fin_train_ds, batch_size=arguments.batch_size, epochs=arguments.epochs,callbacks=[tensorboard_callback])
-    print_log("training loss: " + train.history['loss'] + "training acc:" + train.history['acc'])
+    print_log("training loss: " + train.history['loss'] + "training acc:" + train.history['acc'],arguments)
     print('Start Test')
     log_eval = "log/eval/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     tensorboard_callback2 = tf.keras.callbacks.TensorBoard(log_dir=log_eval, histogram_freq = 1)
 
     value = model.evaluate(test_ds,callbacks=[tensorboard_callback2])
-    print_log("final loss: " + value[0] + "final accuracy: " + value[1] )
+    print_log("final loss: " + value[0] + "final accuracy: " + value[1] , arguments)
 
     del fin_train_ds, test_ds
 
