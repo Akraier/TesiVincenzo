@@ -8,14 +8,13 @@ import tensorflow as tf
 from models.basic import BASIC
 from models.VGG16 import VGG16_19
 from utils.config import *
-
-def print_log(string,arguments , print_on_screen=False, print_on_file=True):
+def print_log(string,arguments,print_on_screen=False, print_on_file=True):
     if print_on_screen:
         print(string)
     if print_on_file:
         #with open(main_path + 'results/ex_logs/' + timeExec + ".results", 'a') as logfile:
         #    logfile.write(string + "\n")
-        path = main_path + "log/e_"+ arguments.epochs +"b_" + arguments.batch_size + "is_" + arguments.image_size +".txt"
+        path = main_path + "log/e_{}b_{}is_{}.txt".format(arguments.epochs, arguments.batch_size, arguments.image_size)
         with open(path, 'a') as logfile:
             logfile.write(string + "\n")
 
