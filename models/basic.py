@@ -27,7 +27,7 @@ class BASIC:
         model.add(layers.Dense(512, activation='relu'))
         model.add(layers.Dense(256, activation='relu'))
         model.add(layers.Dropout(0.5))
-        model.add(layers.Dense(128, activaiont='relu'))
+        model.add(layers.Dense(128, activation='relu'))
         model.add(layers.Dropout(0.5))
         model.add(layers.Dense(self.num_classes, activation='softmax'))
 
