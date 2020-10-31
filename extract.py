@@ -90,7 +90,7 @@ def main(arguments):
                 image = cv2.imread(files[j])
                 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                 feat = desc.describe(gray)
-                out_name = output_db + filename
+                out_name = output_db + in_path[i] + filename
                 print('feature shape:{} ' .format(feat.shape))
                 print(out_name)
                 cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
