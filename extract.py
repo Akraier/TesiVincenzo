@@ -91,7 +91,7 @@ def main(arguments):
                 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                 feat = desc.describe(gray)
                 out_name = output_db + filename
-                print('feature shape: ' + feat.shape)
+                print('feature shape:{} ' .format(feat.shape))
                 print(out_name)
                 cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
                 j += 1
