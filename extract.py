@@ -84,8 +84,9 @@ def main(arguments):
             print(path_)
             files = sorted(glob.glob(path_ + '*.png'))
             print(files)
-            filename = Path(files).name
+            j = 0
             for myFile in tqdm(files):
+                filename = Path(files[j]).name
                 image = cv2.imread(files)
                 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                 feat = desc.describe(gray)
@@ -93,6 +94,7 @@ def main(arguments):
                 print('feature shape: ' + feat.shape)
                 print(out_name)
                 cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
+                j += 1
             i += 1
     elif model_choice == 2:
         model_name = "Haralick_{}".format(datetime.now().strftime("%d-%b-%Y_%H%M"))
