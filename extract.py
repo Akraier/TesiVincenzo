@@ -87,7 +87,7 @@ def main(arguments):
             j = 0
             for myFile in tqdm(files):
                 filename = Path(files[j]).name
-                image = cv2.imread(files)
+                image = cv2.imread(files[j])
                 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                 feat = desc.describe(gray)
                 out_name = output_db + filename
