@@ -80,7 +80,9 @@ def main(arguments):
         desc = LocalBinaryPatterns(30, 16)
         i = 0
         for paths in in_path:
-            files = sorted(glob.glob(input_db + in_path[i] + '*png'))
+            path_ = input_db + in_path[i]
+            files = sorted(glob.glob(path_ + '*.png'))
+            print(files)
             filename = Path(files).name
             for myFile in tqdm(files):
                 image = cv2.imread(files)
