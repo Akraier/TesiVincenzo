@@ -54,16 +54,14 @@ def parse_args():
 def main(arguments):
     input_db = arguments.input_path
     output_db = arguments.output_path
-    in_path = ['training/train/Malware/', 'training/train/Trusted/',
-               'training/validation/Malware/', 'training/validation/Trusted/',
-               'test/Malware/', 'test/Trusted/']
+    in_path = ['training/train/malware/', 'training/train/trusted/',
+               'training/validation/malware/', 'training/validation/trusted/',
+               'test/malware/', 'test/trusted/']
     desc = LocalBinaryPatterns(30, 16)
     i = 0
     for paths in in_path:
         path_ = input_db + in_path[i]
         files = sorted(glob.glob(path_ + '*.png'))
-        print(path_)
-        print(files)
         j = 0
         for myFile in tqdm(files):
             filename = Path(files[j]).name
@@ -84,7 +82,6 @@ def main(arguments):
             feat = np.reshape(feat, (24, 24))
             out_name = output_db + in_path[i] + filename
             print('feature shape: {}' .format(feat.shape))
-            print(out_name)
             feat = cv2.convertScaleAbs(feat, alpha=(255.0))
             cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
             j += 1
