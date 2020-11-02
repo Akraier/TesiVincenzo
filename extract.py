@@ -61,7 +61,7 @@ def main(arguments):
     i = 0
     for paths in in_path:
         path_ = input_db + in_path[i]
-        files = sorted(glob.glob(path_ ))
+        files = sorted(glob.glob(path_ + '*.png'))
         print(files[0])
 
         j = 0
