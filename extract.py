@@ -62,8 +62,8 @@ def main(arguments):
     for paths in in_path:
         path_ = input_db + in_path[i]
         files = sorted(glob.glob(path_ + '*.png'))
-        print(files[0])
-
+        print(path_)
+        print(files)
         j = 0
         for myFile in tqdm(files):
             filename = Path(files[j]).name
