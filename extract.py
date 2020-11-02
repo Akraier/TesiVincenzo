@@ -76,7 +76,7 @@ def main(arguments):
 
 
     if model_choice == 1:
-        model_name = "LBP_{}".format(datetime.now().strftime("%d-%b-%Y_%H%M"))
+        #model_name = "LBP_{}".format(datetime.now().strftime("%d-%b-%Y_%H%M"))
         desc = LocalBinaryPatterns(30, 16)
         i = 0
         for paths in in_path:
@@ -90,15 +90,16 @@ def main(arguments):
                 feat = desc.describe(gray)
                 out_name = output_db + in_path[i] + filename
                 print('feature shape:{} ' .format(feat.shape))
+                feat = cv2.convertScaleAbs(feat, alpha=(255.0))
                 cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
                 j += 1
             i += 1
     elif model_choice == 2:
-        model_name = "Haralick_{}".format(datetime.now().strftime("%d-%b-%Y_%H%M"))
+        #model_name = "Haralick_{}".format(datetime.now().strftime("%d-%b-%Y_%H%M"))
         i = 0
         for paths in in_path:
             path_ = input_db + in_path[i]
-            files = sorted(glob.glob(path_+'*png'))
+            files = sorted(glob.glob(path_ + '*.png'))
             j = 0
             for myFile in tqdm(files):
                 filename = Path(files[j]).name
@@ -118,6 +119,7 @@ def main(arguments):
                 print('feature shape: {}' .format(feat.shape))
                 print(out_name)
                 cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
+                j += 1
             i += 1
 
 
