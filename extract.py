@@ -55,7 +55,7 @@ def main(arguments):
     input_db = arguments.input_path
     output_db = arguments.output_path
     in_path = ['training/train/malware/', 'training/train/trusted/',
-               'training/validation/malware/', 'training/validation/trusted/',
+               'training/val/malware/', 'training/val/trusted/',
                'test/malware/', 'test/trusted/']
     desc = LocalBinaryPatterns(30, 16)
     i = 0
