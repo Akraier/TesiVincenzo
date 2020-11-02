@@ -81,7 +81,7 @@ def main(arguments):
             feat = np.pad(feat, (0, 12), 'constant', constant_values=0) #lenght:576 (24,24)
             feat = np.reshape(feat, (24, 24))
             out_name = output_db + in_path[i] + filename
-            print('feature shape: {}' .format(feat.shape))
+            #print('feature shape: {}' .format(feat.shape))
             feat = cv2.convertScaleAbs(feat, alpha=(255.0))
             cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
             j += 1
