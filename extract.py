@@ -52,7 +52,6 @@ def parse_args():
     return arguments
 
 def main(arguments):
-    base_path = '/home/vincenzo/TesiVincenzo/DATASET1/realdata_PREPROCESSED/'
     input_db = arguments.input_path
     output_db = arguments.output_path
     in_path = ['training/train/Malware/', 'training/train/Trusted/',
@@ -61,6 +60,7 @@ def main(arguments):
     desc = LocalBinaryPatterns(30, 16)
     i = 0
     for paths in in_path:
+        print(1)
         path_ = input_db + in_path[i]
         files = sorted(glob.glob(path_ + '*.png'))
         j = 0
