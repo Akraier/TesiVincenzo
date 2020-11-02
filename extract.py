@@ -81,9 +81,7 @@ def main(arguments):
         i = 0
         for paths in in_path:
             path_ = input_db + in_path[i]
-            print(path_)
             files = sorted(glob.glob(path_ + '*.png'))
-            print(files)
             j = 0
             for myFile in tqdm(files):
                 filename = Path(files[j]).name
@@ -92,7 +90,6 @@ def main(arguments):
                 feat = desc.describe(gray)
                 out_name = output_db + in_path[i] + filename
                 print('feature shape:{} ' .format(feat.shape))
-                print(out_name)
                 cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
                 j += 1
             i += 1
@@ -100,10 +97,12 @@ def main(arguments):
         model_name = "Haralick_{}".format(datetime.now().strftime("%d-%b-%Y_%H%M"))
         i = 0
         for paths in in_path:
-            files = sorted(glob.glob(in_path[i]+'*png'))
-            filename = Path(files).name
+            path_ = input_db + in_path[i]
+            files = sorted(glob.glob(path_+'*png'))
+            j = 0
             for myFile in tqdm(files):
-                image = cv2.imread(files)
+                filename = Path(files[j]).name
+                image = cv2.imread(files[j])
                 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                 # compute the haralick texture feature vector
                 haral = mahotas.features.haralick(gray).mean(axis=0)
@@ -115,8 +114,8 @@ def main(arguments):
                 cv2.normalize(hist, hist)
                 hist = hist.flatten()
                 feat = np.hstack([hist, haral, humom])
-                out_name = output_db + filename
-                print('feature shape: ' + feat.shape)
+                out_name = output_db + in_path[i] + filename
+                print('feature shape: {}' .format(feat.shape))
                 print(out_name)
                 cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
             i += 1
