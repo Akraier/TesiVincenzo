@@ -60,8 +60,8 @@ def main(arguments):
     desc = LocalBinaryPatterns(30, 16)
     i = 0
     for paths in in_path:
-        print(1)
         path_ = input_db + in_path[i]
+        print(path_)
         files = sorted(glob.glob(path_ + '*.png'))
         j = 0
         for myFile in tqdm(files):
