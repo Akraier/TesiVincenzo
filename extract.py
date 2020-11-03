@@ -51,6 +51,24 @@ def parse_args():
     arguments = parser.parse_args()
     return arguments
 
+
+def flat_to_square(flat):
+    size = flat.size
+    dim = 5
+    square = dim*dim
+    while square < size:
+        dim += 1
+        square = dim*dim
+    if square == size:
+        flat = np.reshape(flat, (dim, dim))
+        return flat
+    else:
+        padding = square - size
+        flat = np.pad(flat, (0, padding), 'constant', constant_values=0)
+        flat = np.reshape(flat, (dim, dim))
+        return flat
+
+
 def main(arguments):
     input_db = arguments.input_path
     output_db = arguments.output_path
@@ -68,7 +86,7 @@ def main(arguments):
             image = cv2.imread(files[j])
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             # compute the haralick texture feature vector
-            lbp = desc.describe(gray, cv2.COLOR_BGR2GRAY)
+            lbp = desc.describe(gray, cv2.COLOR_BGR2GRAY, direct_lbp=True)
             haral = mahotas.features.haralick(gray).mean(axis=0)
             humom = cv2.HuMoments(cv2.moments(gray)).flatten()
             hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -77,11 +95,13 @@ def main(arguments):
             # normalize the histogram
             cv2.normalize(hist, hist)
             hist = hist.flatten()
+            lbp = lbp.flatten()
             feat = np.hstack([lbp, hist, haral, humom])
-            feat = np.pad(feat, (0, 12), 'constant', constant_values=0) #lenght:576 (24,24)
-            feat = np.reshape(feat, (24, 24))
+            #feat = np.pad(feat, (0, 12), 'constant', constant_values=0) #lenght:576 (24,24)
+            #feat = np.reshape(feat, (24, 24))
             out_name = output_db + in_path[i] + filename
             #print('feature shape: {}' .format(feat.shape))
+            feat = flat_to_square(feat)
             feat = cv2.convertScaleAbs(feat, alpha=(255.0))
             cv2.imwrite(out_name, feat)#dovrebbe salvare np in png
             j += 1

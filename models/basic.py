@@ -30,7 +30,7 @@ class BASIC:
         model.add(layers.Dropout(0.5))
         model.add(layers.Dense(128, activation='relu'))
         model.add(layers.Dropout(0.5))
-        model.add(layers.Dense(64, activation= 'relu'))
+        model.add(layers.Dense(64, activation='relu'))
         model.add(layers.Dropout(0.5))
         model.add(layers.Dense(self.num_classes, activation='softmax'))
 
