@@ -53,10 +53,11 @@ def main(arguments):
 
     print_log('Start Training for {} epochs  '.format(arguments.epochs), arguments, print_on_screen=True)
     log_fit = "log/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_fit, histogram_freq = 1)
+    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_fit, histogram_freq=1)
     train = model.fit(x=train_ds, batch_size=arguments.batch_size, epochs=arguments.epochs,
-              validation_data=val_ds,callbacks=[tensorboard_callback])
+                      validation_data=val_ds, callbacks=[tensorboard_callback])
     print_log("training loss: {} | training acc:{}" .format(train.history['loss'], train.history['acc']), arguments)
+    print_log("validation loss: {} | validation acc: {}".format(train.history['val_loss'], train.history['val_acc']), arguments)
     del train_ds, val_ds
 
     # --------------  FINAL TRAINING and TEST part  --------------------
@@ -79,7 +80,8 @@ def main(arguments):
 
     value = model.evaluate(test_ds, callbacks=[tensorboard_callback2])
     print_log("final loss: {} | final accuracy: {}".format(value[0], value[1]), arguments)
-
+    print_log("validation loss: {} | validation acc: {}".format(train.history['val_loss'], train.history['val_acc']),
+              arguments)
     del fin_train_ds, test_ds
 
 
