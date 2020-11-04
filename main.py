@@ -75,8 +75,8 @@ def main(arguments):
     final_train = model.fit(x=fin_train_ds, batch_size=arguments.batch_size, epochs=arguments.epochs, callbacks=[tensorboard_callback])
     print_log("training loss: {} | training acc:{}" .format(train.history['loss'], train.history['acc']), arguments)
     print('Start Test')
-    log_eval = "log/eval/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    tensorboard_callback2 = tf.keras.callbacks.TensorBoard(log_dir=log_eval, histogram_freq = 1)
+    log_eval = "log/ffit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_callback2 = tf.keras.callbacks.TensorBoard(log_dir=log_eval, histogram_freq=1)
 
     value = model.evaluate(test_ds, callbacks=[tensorboard_callback2])
     print_log("final loss: {} | final accuracy: {}".format(value[0], value[1]), arguments)
