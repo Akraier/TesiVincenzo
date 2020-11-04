@@ -15,9 +15,9 @@ class BASIC:
         model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(self.input_width_height,
                                                                             self.input_width_height,
                                                                             self.channels)))
-        model.add(layers.conv2D(32, (3, 3), activation='relu'))
+        model.add(layers.Conv2D(32, (3, 3), activation='relu'))
         model.add(layers.MaxPooling2D((2, 2)))
-        model.add(layers.conv2D(64, (3, 3), activation='relu'))
+        model.add(layers.Conv2D(64, (3, 3), activation='relu'))
         model.add(layers.Conv2D(64, (3, 3), activation='relu'))
         model.add(layers.MaxPooling2D((2, 2)))
         model.add(layers.Conv2D(128, (3, 3), activation='relu'))
