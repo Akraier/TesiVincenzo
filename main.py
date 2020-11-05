@@ -77,10 +77,9 @@ def main(arguments):
     print('Start Test')
     log_eval = "log/ffit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     tensorboard_callback2 = tf.keras.callbacks.TensorBoard(log_dir=log_eval, histogram_freq=1)
-
     value = model.evaluate(test_ds, callbacks=[tensorboard_callback2])
     print_log("final loss: {} | final accuracy: {}".format(value[0], value[1]), arguments)
-    print_log("validation loss: {} | validation acc: {}".format(train.history['val_loss'], train.history['val_acc']),
+    print_log("validation loss: {} | validation acc: {}".format(final_train.history['val_loss'], final_train.history['val_acc']),
               arguments)
     del fin_train_ds, test_ds
 
