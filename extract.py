@@ -86,7 +86,7 @@ def main(arguments):
             image = cv2.imread(files[j])
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             # compute the haralick texture feature vector
-            lbp = desc.describe(gray, cv2.COLOR_BGR2GRAY, direct_lbp=True)
+            lbp = desc.describe(gray, cv2.COLOR_BGR2GRAY)
             haral = mahotas.features.haralick(gray).mean(axis=0)
             humom = cv2.HuMoments(cv2.moments(gray)).flatten()
             hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
