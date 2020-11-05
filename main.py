@@ -74,9 +74,6 @@ def main(arguments):
     print_log('Start Final Training for {} epochs  '.format(arguments.epochs), arguments, print_on_screen=True)
     final_train = model.fit(x=fin_train_ds, batch_size=arguments.batch_size, epochs=arguments.epochs, callbacks=[tensorboard_callback])
     print_log("training loss: {} | training acc:{}" .format(final_train.history['loss'], final_train.history['acc']), arguments)
-    print_log("validation loss: {} | validation acc: {}".format(final_train.history['val_loss'],
-                                                                final_train.history['val_acc']),
-              arguments)
     print('Start Test')
     log_eval = "log/ffit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     tensorboard_callback2 = tf.keras.callbacks.TensorBoard(log_dir=log_eval, histogram_freq=1)
