@@ -8,6 +8,8 @@ import tensorflow as tf
 from models.basic import BASIC
 from models.VGG16 import VGG16_19
 from utils.config import *
+
+
 def print_log(string,arguments,print_on_screen=False, print_on_file=True):
     if print_on_screen:
         print(string)
@@ -17,6 +19,7 @@ def print_log(string,arguments,print_on_screen=False, print_on_file=True):
         path = main_path + "log/e_{}b_{}is_{}.txt".format(arguments.epochs, arguments.batch_size, arguments.image_size)
         with open(path, 'a') as logfile:
             logfile.write(string + "\n")
+
 
 def main(arguments):
 

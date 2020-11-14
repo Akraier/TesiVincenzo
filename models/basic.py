@@ -36,5 +36,5 @@ class BASIC:
         model.add(layers.Dense(self.num_classes, activation='softmax'))
 
         model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-
+        model.summary()
         return model
